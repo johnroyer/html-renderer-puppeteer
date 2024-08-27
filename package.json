@@ -9,6 +9,6 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "puppeteer-core": "^23.2.0"
+    "puppeteer": "23.2.*"
   }
 }
