@@ -1,6 +1,13 @@
 import puppeteer from 'puppeteer'
 
-const browser = await puppeteer.launch()
+const browser = await puppeteer.launch({
+    headless: true,
+    args: [
+        '--proxy-server=http://lab.zeroplex.tw:3128',
+        '--ignore-certificate-errors',
+        '--ignore-certificate-errors-spki-list',
+    ]
+})
 
 const page = await browser.newPage()
 
