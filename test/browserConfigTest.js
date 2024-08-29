@@ -15,4 +15,11 @@ describe('getProxyProtocol', function () {
             'https:',
         )
     })
+
+    it ('should be SOCKET', function () {
+        assert.equal(
+            BrowserConfig.getProxyProtocol('socket5://127.0.0.1'),
+            'socket5:'
+        )
+    })
 })
