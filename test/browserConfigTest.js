@@ -30,3 +30,19 @@ describe('getProxyProtocol', function () {
         )
     })
 })
+
+describe('create BrowserConfig', function () {
+    it('should initialize with out error', function () {
+        let url = 'https://test.com'
+        let proxy = 'http://127.0.0.1:3128'
+        let config = new BrowserConfig({
+            'url': url,
+            'proxy': proxy
+        })
+
+        assert.equal(
+            config.url,
+            url
+        )
+    })
+})
