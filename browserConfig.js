@@ -15,10 +15,10 @@ export default class BrowserConfig {
             let proxy = new String(options.proxy)
 
             switch (this.getProxyProtocol(proxy)) {
-                case "http":
-                case "https":
-                case "socket4":
-                case "socket5":
+                case "http:":
+                case "https:":
+                case "socket4:":
+                case "socket5:":
                     this.#proxy = proxy
                 default:
                     throw new Error("invalid proxy")
