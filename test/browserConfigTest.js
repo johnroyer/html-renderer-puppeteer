@@ -22,4 +22,11 @@ describe('getProxyProtocol', function () {
             'socket5:'
         )
     })
+
+    it ('should throws error', function () {
+        assert.equal(
+            BrowserConfig.getProxyProtocol('invalid://127.0.0.1'),
+            'invalid:'
+        )
+    })
 })
