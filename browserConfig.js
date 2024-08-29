@@ -1,6 +1,6 @@
 import url from "url"
 
-class BrowserConfig {
+export default class BrowserConfig {
     #url = ''
     #proxy = false;
 
