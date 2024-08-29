@@ -28,7 +28,7 @@ export default class BrowserConfig {
         }
     }
 
-    getProxyProtocol(proxy) {
+    static getProxyProtocol(proxy) {
         let url = new URL(proxy)
         return url.protocol
     }
