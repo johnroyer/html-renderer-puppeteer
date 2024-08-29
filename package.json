@@ -10,5 +10,8 @@
   "type": "module",
   "dependencies": {
     "puppeteer": "23.2.*"
+  },
+  "devDependencies": {
+    "mocha": "^10.7.3"
   }
 }
