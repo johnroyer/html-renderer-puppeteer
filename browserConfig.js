@@ -1,7 +1,19 @@
+import url from "url"
+
 class BrowserConfig {
     #url = ''
     #proxy = false;
 
     constructor(options) {
+        if (!("url" in options)) {
+            throw new Error("invalid URL")
+        } else {
+            this.#url = options.url
+        }
+    }
+
+    getProxyProtocol(proxy) {
+        let url = new URL(proxy)
+        return url.protocol
     }
 }
