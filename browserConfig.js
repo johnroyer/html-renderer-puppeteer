@@ -17,7 +17,6 @@ export default class BrowserConfig {
             switch (this.getProxyProtocol(proxy)) {
                 case "http:":
                 case "https:":
-                case "socket4:":
                 case "socket5:":
                     this.#proxy = proxy
                 default:
