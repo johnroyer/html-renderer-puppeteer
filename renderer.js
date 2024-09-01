@@ -20,6 +20,9 @@ export default class Renderer {
 
     async run() {
         let launchArgs = []
+        let pageHtml = ''
+        let httpStatusCode = 200
+
         if (undefined !== this.#proxy) {
             launchArgs = [
                 '--proxy-server=' + this.#proxy,
@@ -35,6 +38,10 @@ export default class Renderer {
 
         const page = await browser.newPage()
 
+        await page.on('response', function (response) {
+            httpStatusCode = response.status()
+        })
+
         await page.goto(this.#url)
 
         await page.content()
@@ -43,5 +50,10 @@ export default class Renderer {
             })
 
         await browser.close()
+
+        return {
+            "httpStatusCode": httpStatusCode,
+            "html": pageHtml
+        }
     }
 }
