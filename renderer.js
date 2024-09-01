@@ -1,9 +1,19 @@
 import puppeteer from 'puppeteer'
 
 class Renderer {
+    #url
+    #proxy
+
     constructor(browserConfig) {
-        this.url = browserConfig.url
-        this.proxy = browserConfig.proxy
+        if (!("url" in browserConfig)) {
+            throw new Error("invalid URL")
+        } else {
+            this.#url = browserConfig.url
+        }
+
+        if (!("proxy" in browserConfig)) {
+            this.#proxy = undefine
+        }
     }
 }
 
