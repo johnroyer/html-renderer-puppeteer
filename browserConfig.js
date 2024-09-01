@@ -1,5 +1,3 @@
-import url from "url"
-
 export default class BrowserConfig {
     #url = ''
     #proxy = false;
