@@ -5,7 +5,6 @@ export default class Renderer {
     #proxy
 
     constructor(browserConfig) {
-        console.log(browserConfig)
         if (!("url" in browserConfig)) {
             throw new Error("invalid URL")
         } else {
@@ -28,7 +27,6 @@ export default class Renderer {
                 '--ignore-certificate-errors-spki-list',
             ]
         }
-        console.log(launchArgs)
 
         const browser = await puppeteer.launch({
             headless: true,
@@ -41,12 +39,7 @@ export default class Renderer {
 
         await page.content()
             .then(function(content) {
-                console.log("----------")
-                console.log(content)
-                console.log("----------")
-            })
-            .then(function (failure) {
-                console.log(failure)
+                pageHtml = content
             })
 
         await browser.close()
