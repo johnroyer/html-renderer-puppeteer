@@ -1,5 +1,12 @@
 import puppeteer from 'puppeteer'
 
+class Renderer {
+    constructor(browserConfig) {
+        this.url = browserConfig.url
+        this.proxy = browserConfig.proxy
+    }
+}
+
 const browser = await puppeteer.launch({
     headless: true,
     args: [
