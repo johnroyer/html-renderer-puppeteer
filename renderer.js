@@ -1,10 +1,11 @@
 import puppeteer from 'puppeteer'
 
-class Renderer {
+export default class Renderer {
     #url
     #proxy
 
     constructor(browserConfig) {
+        console.log(browserConfig)
         if (!("url" in browserConfig)) {
             throw new Error("invalid URL")
         } else {
@@ -12,32 +13,42 @@ class Renderer {
         }
 
         if (!("proxy" in browserConfig)) {
-            this.#proxy = undefine
+            this.#proxy = undefined
+        } else {
+            this.#proxy = browserConfig.proxy
         }
     }
+
+    async run() {
+        let launchArgs = []
+        if (undefined !== this.#proxy) {
+            launchArgs = [
+                '--proxy-server=' + this.#proxy,
+                '--ignore-certificate-errors',
+                '--ignore-certificate-errors-spki-list',
+            ]
+        }
+        console.log(launchArgs)
+
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: launchArgs
+        })
+
+        const page = await browser.newPage()
+
+        await page.goto(this.#url)
+
+        await page.content()
+            .then(function(content) {
+                console.log("----------")
+                console.log(content)
+                console.log("----------")
+            })
+            .then(function (failure) {
+                console.log(failure)
+            })
+
+        await browser.close()
+    }
 }
-
-const browser = await puppeteer.launch({
-    headless: true,
-    args: [
-        '--proxy-server=http://lab.zeroplex.tw:3128',
-        '--ignore-certificate-errors',
-        '--ignore-certificate-errors-spki-list',
-    ]
-})
-
-const page = await browser.newPage()
-
-await page.goto('https://zeroplex.tw/ip')
-
-await page.content()
-    .then(function(content) {
-        console.log("----------")
-        console.log(content)
-        console.log("----------")
-    })
-    .then(function (failure) {
-        console.log(failure)
-})
-
-browser.close()
