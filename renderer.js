@@ -24,19 +24,6 @@ export default class Renderer {
         let pageHtml = ''
         let httpStatusCode = 200
 
-        if (undefined !== this.#proxy) {
-            launchArgs = [
-                '--proxy-server=' + this.#proxy,
-                '--ignore-certificate-errors',
-                '--ignore-certificate-errors-spki-list',
-            ]
-            process.env.HTTP_PROXY = this.#proxy
-            process.env.HTTPS_PROXY = this.#proxy
-
-            console.log(process.env.HTTPS_PROXY)
-        }
-        console.log(launchArgs)
-
         const browser = await puppeteer.launch({
             headless: true,
         })
