@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer'
+import proxyRequest from 'puppeteer-proxy';
 
 export default class Renderer {
     #url
@@ -29,14 +30,29 @@ export default class Renderer {
                 '--ignore-certificate-errors',
                 '--ignore-certificate-errors-spki-list',
             ]
+            process.env.HTTP_PROXY = this.#proxy
+            process.env.HTTPS_PROXY = this.#proxy
+
+            console.log(process.env.HTTPS_PROXY)
         }
+        console.log(launchArgs)
 
         const browser = await puppeteer.launch({
             headless: true,
-            args: launchArgs
         })
 
         const page = await browser.newPage()
+
+        await page.setRequestInterception(true);
+
+        page.on('request', async (request) => {
+            await proxyRequest({
+                page,
+                proxyUrl: this.#proxy,
+                request,
+            });
+        });
+
 
         await page.on('response', function (response) {
             httpStatusCode = response.status()
