@@ -15,13 +15,11 @@ const httpServer = http.createServer((req, res) => {
 
         req.on('end', () => {
             data = JSON.parse(body)
-            console.log(data)
 
             let renderer = new Renderer(data)
             let result = renderer.run()
 
             result.then(function (back) {
-                console.log(back)
                 res.end(JSON.stringify(back))
             })
 
