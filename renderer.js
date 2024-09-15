@@ -22,7 +22,6 @@ export default class Renderer {
     }
 
     async run() {
-        let launchArgs = []
         let pageHtml = ''
         let httpStatusCode = 200
 
