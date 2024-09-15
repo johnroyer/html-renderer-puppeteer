@@ -1,5 +1,7 @@
 import puppeteer from 'puppeteer'
-import proxyRequest from 'puppeteer-proxy';
+import {
+    proxyRequest,
+} from 'puppeteer-proxy'
 
 export default class Renderer {
     #url
