@@ -9,7 +9,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "puppeteer": "23.2.*"
+    "puppeteer": "23.2.*",
+    "puppeteer-proxy": "^1.0.3"
   },
   "devDependencies": {
     "mocha": "^10.7.3"
