@@ -1,5 +1,5 @@
 import http from "http"
-import queryString from "querystring";
+import Renderer from "./renderer.js";
 
 const address = '127.0.0.1'
 const port = 38080
@@ -7,20 +7,25 @@ const port = 38080
 const httpServer = http.createServer((req, res) => {
     if (req.url=='/') {
         let body = ''
-        let postData
+        let data
 
         req.on('data', (data) => {
-            body += data
+            body += data.toString()
         })
 
         req.on('end', () => {
-            postData = queryString.parse(body)
+            data = JSON.parse(body)
+            console.log(data)
 
-            console.log(postData)
+            let renderer = new Renderer(data)
+            let result = renderer.run()
+
+            result.then(function (back) {
+                console.log(back)
+                res.end(JSON.stringify(back))
+            })
+
         })
-
-        res.write('hello world')
-        res.end()
     }
 })
 httpServer.listen(port, address)
