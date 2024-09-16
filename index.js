@@ -24,6 +24,9 @@ const httpServer = http.createServer((req, res) => {
             })
 
         })
+    } else {
+        res.writeHead(404)
+        res.end()
     }
 })
 httpServer.listen(port, address)
