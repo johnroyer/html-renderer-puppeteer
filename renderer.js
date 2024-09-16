@@ -26,6 +26,7 @@ export default class Renderer {
         let httpStatusCode = 200
 
         const browser = await puppeteer.launch({
+            executablePath: '/usr/bin/chromium',
             headless: true,
         })
 
