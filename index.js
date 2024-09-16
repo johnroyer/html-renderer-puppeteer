@@ -5,7 +5,7 @@ const address = '127.0.0.1'
 const port = 38080
 
 const httpServer = http.createServer((request, response) => {
-    if (request.url=='/') {
+    if (request.url == '/') {
         let body = ''
         let data
 
@@ -29,6 +29,7 @@ const httpServer = http.createServer((request, response) => {
         response.end()
     }
 })
+
 httpServer.listen(port, address)
 
 console.log(`Listening on ${address}` + ' port ' + port.toString())
