@@ -4,7 +4,14 @@ import Renderer from "./renderer.js";
 const address = '127.0.0.1'
 const port = 38080
 
+const debugLog = function (request, response) {
+    let message = request.method + ' ' + request.url
+    console.log(message)
+}
+
 const httpServer = http.createServer((request, response) => {
+    debugLog(request, response)
+
     if (request.url == '/') {
         let body = ''
         let data
