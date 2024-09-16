@@ -31,4 +31,4 @@ const httpServer = http.createServer((req, res) => {
 })
 httpServer.listen(port, address)
 
-console.log(`Listening on ${address}`)
+console.log(`Listening on ${address}` + ' port ' + port.toString())
