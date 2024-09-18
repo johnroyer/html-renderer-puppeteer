@@ -23,6 +23,12 @@ const httpServer = http.createServer((request, response) => {
         request.on('end', () => {
             data = JSON.parse(body)
 
+            if (!data.hasOwnProperty('url')) {
+                // not given url
+                response.writeHead(400)
+                response.end('missing URL')
+            }
+
             let renderer = new Renderer(data)
             let result = renderer.run()
 
