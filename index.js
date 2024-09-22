@@ -21,7 +21,20 @@ const httpServer = http.createServer((request, response) => {
         })
 
         request.on('end', () => {
+            if (0 == body.length) {
+                // no input
+                response.writeHead(400)
+                response.end('invalid request')
+                return
+            }
+
             data = JSON.parse(body)
+            if (!data.hasOwnProperty("url")) {
+                // undefined URL
+                response.writeHead(400)
+                response.end('URL not found')
+                return
+            }
 
             if (!data.hasOwnProperty('url')) {
                 // not given url
@@ -40,6 +53,7 @@ const httpServer = http.createServer((request, response) => {
     } else {
         response.writeHead(404)
         response.end()
+        return
     }
 })
 
