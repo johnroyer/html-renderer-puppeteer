@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer-core'
 import {
     proxyRequest,
 } from 'puppeteer-proxy'
+import {html} from "mocha/lib/reporters/index.js";
 
 export default class Renderer {
     #url
@@ -45,6 +46,12 @@ export default class Renderer {
 
         await page.on('response', function (response) {
             httpStatusCode = response.status()
+        })
+
+        await page.on('requestfailed', function (request) {
+            // failed to send a reqest
+            console.log(request.failure());
+            throw 'Request failed: ' + request.failure().toString()
         })
 
         await page.goto(this.#url)
