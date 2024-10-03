@@ -36,6 +36,17 @@ export default class Renderer {
         await page.setRequestInterception(true);
 
         page.on('request', async (request) => {
+            if (request.failure()) {
+                // 檢查錯誤訊息
+                const errorMessage = request.failure().errorText;
+
+                if (errorMessage.includes('net::ERR_FAILED')) {
+                    // 域名不存在錯誤
+                    console.log('domain not exists: ', request.url());
+                }
+                request.abort()
+            }
+
             await proxyRequest({
                 page,
                 proxyUrl: this.#proxy,
