@@ -37,22 +37,11 @@ const httpServer = http.createServer((request, response) => {
             }
 
             let renderer = new Renderer(data)
+            let result = renderer.run()
 
-            // let result = renderer.run()
-            const run = async function (renderer) {
-                return await renderer.run()
-            }
-
-            try {
-                run().then(function (resolved, reject) {
-                    console.log(resolved)
-                    console.log(reject)
-                }).catch(function (error) {
-                    console.log(error)
-                })
-            } catch (error) {
-                console.log(error)
-            }
+            result.then(function (back) {
+                response.end(JSON.stringify(back))
+            })
 
         })
     } else {
