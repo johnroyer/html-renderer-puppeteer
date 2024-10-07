@@ -20,6 +20,11 @@ export default class Renderer {
         } else {
             this.#proxy = browserConfig.proxy
         }
+
+        process.on('unhandledRejection', function(reason, promise) {
+            // console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+            console.warn('Unhandled promise rejection:', promise, 'reason:', reason.stack || reason);
+        })
     }
 
     async run() {
