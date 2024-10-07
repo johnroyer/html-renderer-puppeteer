@@ -21,10 +21,6 @@ export default class Renderer {
             this.#proxy = browserConfig.proxy
         }
 
-        process.on('unhandledRejection', function(reason, promise) {
-            // console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-            console.warn('Unhandled promise rejection:', promise, 'reason:', reason.stack || reason);
-        })
     }
 
     async run() {
@@ -70,7 +66,25 @@ export default class Renderer {
             throw 'Request failed: ' + request.failure().toString()
         })
 
-        await page.goto(this.#url)
+        process.on('unhandledRejection', function(reason, promise) {
+            // possible domain not found
+            // console.log('Unhandled promise rejection:', promise, 'reason:', reason.stack || reason);
+            // don't konw why, but it works .....
+        })
+
+        try {
+            let result = await page.goto(this.#url)
+        } catch (error) {
+            let msg = error.toString()
+            let errMsg = msg.slice(0, msg.indexOf("\n"))
+
+            return {
+                "status": errMsg,
+                "httpStatusCode": "400",
+                "html": ""
+            }
+        }
+
 
         await page.content()
             .then(function(content) {
@@ -80,6 +94,7 @@ export default class Renderer {
         await browser.close()
 
         return {
+            "status": "ok",
             "httpStatusCode": httpStatusCode,
             "html": pageHtml
         }
