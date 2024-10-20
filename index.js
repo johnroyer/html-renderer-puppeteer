@@ -1,8 +1,8 @@
 import http from "http"
 import Renderer from "./renderer.js";
 
-const address = '127.0.0.1'
-const port = 38080
+const address = process.env.ADDRESS || "0.0.0.0"
+const port = process.env.PORT || 38080
 
 const debugLog = function (request, response) {
     let message = request.method + ' ' + request.url
