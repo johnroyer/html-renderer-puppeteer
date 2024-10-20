@@ -2,7 +2,6 @@ import puppeteer from 'puppeteer-core'
 import {
     proxyRequest,
 } from 'puppeteer-proxy'
-import {html} from "mocha/lib/reporters/index.js";
 
 export default class Renderer {
     #url
