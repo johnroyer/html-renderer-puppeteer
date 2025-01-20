@@ -12,7 +12,7 @@ const debugLog = function (request, response) {
 const httpServer = http.createServer((request, response) => {
     debugLog(request, response)
 
-    if (request.url == '/') {
+    if (request.url === '/') {
         let body = ''
         let data
 
@@ -21,7 +21,7 @@ const httpServer = http.createServer((request, response) => {
         })
 
         request.on('end', () => {
-            if (0 == body.length) {
+            if (0 === body.length) {
                 // no input
                 response.writeHead(400)
                 response.end('invalid request')
