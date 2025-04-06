@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.20 AS base
+FROM node:lts-alpine3.21 AS base
 
 # install chromium
 RUN apk update \
