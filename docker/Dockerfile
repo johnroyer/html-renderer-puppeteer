@@ -1,8 +1,7 @@
 FROM node:lts-alpine3.21 AS base
 
 # install chromium
-RUN apk update \
-    && apk add chromium \
+RUN apk add chromium --no-cache \
     && rm -rf /var/cache/apk/*
 
 # copy source code
