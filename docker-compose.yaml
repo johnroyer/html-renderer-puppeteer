@@ -1,0 +1,6 @@
+services:
+  renderer:
+    image: johnroyer/html-renderer-puppeteer:0.1.4
+    ports:
+      - 127.0.0.1:38080:38080
+    restart: on-failure
