@@ -36,6 +36,7 @@ export default class Renderer {
         console.log('new page ...')
         const page = await browser.newPage()
 
+        console.log('interception ...')
         await page.setRequestInterception(true);
 
         page.on('request', async (request) => {
@@ -58,6 +59,7 @@ export default class Renderer {
         });
 
 
+        console.log('setting call back .....')
         await page.on('response', function (response) {
             httpStatusCode = response.status()
         })
