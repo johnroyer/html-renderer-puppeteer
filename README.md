@@ -25,4 +25,4 @@ run:
 ```shell
 docker run -d --name html-renderer-puppeteer \
     -p 38080:38080 \
-    johnroyer/html-renderer-puppeteer:latest
+    johnroyer/html-renderer-puppeteer:0.1.4
