@@ -29,6 +29,7 @@ export default class Renderer {
         const browser = await puppeteer.launch({
             executablePath: '/usr/bin/chromium',
             headless: true,
+            args: ['--no-sandbox'],
         })
 
         const page = await browser.newPage()
