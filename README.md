@@ -13,3 +13,16 @@ curl -X POST -d '{"url":"https://zeroplex.tw/ip","proxy":"http://your.proxy:3128
 {"httpStatusCode":200,"html":"<html><head></head><body>10.1.1.1</body></html>"}
 ```
 
+## Docker
+
+docker pull:
+
+```shell
+docker pull johnroyer/html-renderer-puppeteer:latest
+```
+
+run:
+```shell
+docker run -d --name html-renderer-puppeteer \
+    -p 38080:38080 \
+    johnroyer/html-renderer-puppeteer:latest
