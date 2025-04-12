@@ -26,12 +26,14 @@ export default class Renderer {
         let pageHtml = ''
         let httpStatusCode = 200
 
+        console.log('lauching browser ...')
         const browser = await puppeteer.launch({
             executablePath: '/usr/bin/chromium',
             headless: true,
             args: ['--no-sandbox'],
         })
 
+        console.log('new page ...')
         const page = await browser.newPage()
 
         await page.setRequestInterception(true);
@@ -72,6 +74,7 @@ export default class Renderer {
             // don't konw why, but it works .....
         })
 
+        console.log('go to ' + this.#url + ' ...')
         try {
             let result = await page.goto(this.#url)
         } catch (error) {
@@ -91,6 +94,7 @@ export default class Renderer {
                 pageHtml = content
             })
 
+        console.log('close and clean ...')
         await browser.close()
 
         return {
