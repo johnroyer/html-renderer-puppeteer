@@ -107,16 +107,11 @@ export default class Renderer {
                 "httpStatusCode": "400",
                 "html": ""
             }
+        } finally {
+            // 一定要關閉，puppeteer 才會刪除暫存的 profile 目錄
+            console.log('close and clean ...')
+            await browser.close()
         }
-
-
-        await page.content()
-            .then(function(content) {
-                pageHtml = content
-            })
-
-        console.log('close and clean ...')
-        await browser.close()
 
         return {
             "status": "ok",
