@@ -9,10 +9,10 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "puppeteer-core": "^24.6.*",
-    "puppeteer-proxy": "^1.0.3"
+    "puppeteer-core": "^25.12.*",
+    "puppeteer-proxy": "^1.9.0"
   },
   "devDependencies": {
-    "mocha": "^10.7.3"
+    "mocha": "^12.0.3"
   }
 }
