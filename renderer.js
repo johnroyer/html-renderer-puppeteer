@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer-core'
-import {
-    proxyRequest,
-} from 'puppeteer-proxy'
+import puppeteerProxy from 'puppeteer-proxy'
+
+const { proxyRequest } = puppeteerProxy
 
 export default class Renderer {
     #url
