@@ -30,11 +30,29 @@ export default class Renderer {
         const browser = await puppeteer.launch({
             executablePath: '/usr/bin/chromium',
             headless: true,
-            args: ['--no-sandbox'],
+            args: [
+                '--no-sandbox',
+
+                // do disk cache
+                '--disk-cache-dir=/dev/null',
+                '--disk-cache-size=1',
+                '--media-cache-size=1',
+
+                // stop background service
+                '--no-first-run',
+                '--no-default-browser-check',
+                '--disable-sync',
+                '--disable-extensions',
+                '--disable-background-networking',
+                '--disable-component-update',
+            ],
         })
 
+        const context = await browser.createBrowserContext()
+
         console.log('new page ...')
-        const page = await browser.newPage()
+        const page = await context.newPage()
+        await page.setCacheEnabled(false)
 
         console.log('interception ...')
         await page.setRequestInterception(true);
@@ -79,6 +97,7 @@ export default class Renderer {
         console.log('go to ' + this.#url + ' ...')
         try {
             let result = await page.goto(this.#url)
+            pageHtml = await page.content()
         } catch (error) {
             let msg = error.toString()
             let errMsg = msg.slice(0, msg.indexOf("\n"))
